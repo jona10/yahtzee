@@ -41,6 +41,35 @@ namespace Yahtzee.Core
             return dice.GroupBy(x => x).Count() == 2 ? 25 : 0;
         }
 
+        private static bool IsStraight(int lengthOfStraight, IReadOnlyCollection<int> dice)
+        {
+            var ordered = dice.Distinct().OrderBy(x => x).ToArray();
+
+            var inOrderCount = 1;
+            for (int i = 0; i < ordered.Length - 1; i++)
+            {
+                if (ordered[i + 1] == ordered[i] + 1)
+                    inOrderCount++;
+                else
+                    inOrderCount = 1;
+
+                if (inOrderCount >= lengthOfStraight)
+                    return true;
+            }
+
+            return false;
+        }
+
+        public static int SmallStraight(IReadOnlyCollection<int> dice)
+        {
+            return IsStraight(4, dice) ? 30 : 0;
+        }
+
+        public static int LongStraight(IReadOnlyCollection<int> dice)
+        {
+            return IsStraight(5, dice) ? 40 : 0;
+        }
+
         public static int Yahtzee(IReadOnlyCollection<int> dice)
         {
             return IsRepeated(5, dice) ? 50 : 0;
