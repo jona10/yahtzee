@@ -40,5 +40,10 @@ namespace Yahtzee.Core
         {
             return dice.GroupBy(x => x).Count() == 2 ? 25 : 0;
         }
+
+        public static int Yahtzee(IReadOnlyCollection<int> dice)
+        {
+            return IsRepeated(5, dice) ? 50 : 0;
+        }
     }
 }

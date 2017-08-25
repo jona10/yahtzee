@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using Xunit;
 using Yahtzee.Core;
 
@@ -15,7 +13,7 @@ namespace Yahtzee.Test
         }
 
         [Fact]
-        public void ReturnsTwentyFizeWhenDiceFormAFullHouse()
+        public void ReturnsTwentyFiveWhenDiceFormAFullHouse()
         {
             Assert.Equal(25, Score.FullHouse(new List<int> { 1, 1, 1, 4, 4 }));
         }
