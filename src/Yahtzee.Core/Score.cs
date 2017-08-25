@@ -11,10 +11,15 @@ namespace Yahtzee.Core
         }
 
         public static int Ones(IReadOnlyCollection<int> dice) => DiceOfValue(1, dice);
+
         public static int Twos(IReadOnlyCollection<int> dice) => DiceOfValue(2, dice);
+
         public static int Threes(IReadOnlyCollection<int> dice) => DiceOfValue(3, dice);
+
         public static int Fours(IReadOnlyCollection<int> dice) => DiceOfValue(4, dice);
+
         public static int Fives(IReadOnlyCollection<int> dice) => DiceOfValue(5, dice);
+
         public static int Sixes(IReadOnlyCollection<int> dice) => DiceOfValue(6, dice);
 
         private static bool IsRepeated(int numberOfTimes, IReadOnlyCollection<int> dice)
@@ -28,6 +33,12 @@ namespace Yahtzee.Core
         }
 
         public static int ThreeOfAKind(IReadOnlyCollection<int> dice) => DiceOfAKind(3, dice);
+
         public static int FourOfAKind(IReadOnlyCollection<int> dice) => DiceOfAKind(4, dice);
+
+        public static int FullHouse(IReadOnlyCollection<int> dice)
+        {
+            return dice.GroupBy(x => x).Count() == 2 ? 25 : 0;
+        }
     }
 }

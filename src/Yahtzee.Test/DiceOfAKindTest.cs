@@ -4,7 +4,7 @@ using Yahtzee.Core;
 
 namespace Yahtzee.Test
 {
-    public class SumForDiceOfAKind
+    public class DiceOfAKindTest
     {
         public static IEnumerable<object[]> ThreeOfAKind => new object[][] {
             new object[] { new []{ 1, 2, 3, 4, 5 }, 0 },
