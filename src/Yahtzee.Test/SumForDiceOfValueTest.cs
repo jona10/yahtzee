@@ -64,7 +64,7 @@ namespace Yahtzee.Tests
         [MemberData(nameof(SumOfOnes))]
         public void ReturnsTheSumOfOnes(int[] dice, int expected)
         {
-            var result = Score.SumForDiceOfValue(1, dice);
+            var result = Score.DiceOfValue(1, dice);
 
             Assert.Equal(expected, result);
         }
@@ -73,7 +73,7 @@ namespace Yahtzee.Tests
         [MemberData(nameof(SumOfTwos))]
         public void ReturnsTheSumOfTwos(int[] dice, int expected)
         {
-            var result = Score.SumForDiceOfValue(2, dice);
+            var result = Score.DiceOfValue(2, dice);
 
             Assert.Equal(expected, result);
         }
@@ -82,7 +82,7 @@ namespace Yahtzee.Tests
         [MemberData(nameof(SumOfThrees))]
         public void ReturnsTheSumOfThrees(int[] dice, int expected)
         {
-            var result = Score.SumForDiceOfValue(3, dice);
+            var result = Score.DiceOfValue(3, dice);
 
             Assert.Equal(expected, result);
         }
@@ -91,7 +91,7 @@ namespace Yahtzee.Tests
         [MemberData(nameof(SumOfFours))]
         public void ReturnsTheSumOfFours(int[] dice, int expected)
         {
-            var result = Score.SumForDiceOfValue(4, dice);
+            var result = Score.DiceOfValue(4, dice);
 
             Assert.Equal(expected, result);
         }
@@ -100,7 +100,7 @@ namespace Yahtzee.Tests
         [MemberData(nameof(SumOfFives))]
         public void ReturnsTheSumOfFives(int[] dice, int expected)
         {
-            var result = Score.SumForDiceOfValue(5, dice);
+            var result = Score.DiceOfValue(5, dice);
 
             Assert.Equal(expected, result);
         }
@@ -109,7 +109,7 @@ namespace Yahtzee.Tests
         [MemberData(nameof(SumOfSixes))]
         public void ReturnsTheSumOfSixes(int[] dice, int expected)
         {
-            var result = Score.SumForDiceOfValue(6, dice);
+            var result = Score.DiceOfValue(6, dice);
 
             Assert.Equal(expected, result);
         }
