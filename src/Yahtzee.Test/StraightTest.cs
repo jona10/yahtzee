@@ -15,21 +15,21 @@ namespace Yahtzee.Test
         [Fact]
         public void ReturnsZeroWhenDiceDontFormAStraight()
         {
-            Assert.Equal(0, Score.SmallStraight(new List<int> { 1, 1, 1, 1, 1 }));
-            Assert.Equal(0, Score.LongStraight(new List<int> { 1, 1, 1, 1, 1 }));
+            Assert.Equal(0, Scorer.SmallStraight(new List<int> { 1, 1, 1, 1, 1 }));
+            Assert.Equal(0, Scorer.LongStraight(new List<int> { 1, 1, 1, 1, 1 }));
         }
 
         [Theory]
         [MemberData(nameof(SmallStraights))]
         public void ReturnsThirtyWhenDiceFormASmallStraight(int[] dice)
         {
-            Assert.Equal(30, Score.SmallStraight(dice));
+            Assert.Equal(30, Scorer.SmallStraight(dice));
         }
 
         [Fact]
         public void ReturnsThirtyWhenDiceFormALongStraight()
         {
-            Assert.Equal(40, Score.LongStraight(new List<int> { 1, 2, 3, 4, 5 }));
+            Assert.Equal(40, Scorer.LongStraight(new List<int> { 1, 2, 3, 4, 5 }));
         }
     }
 }

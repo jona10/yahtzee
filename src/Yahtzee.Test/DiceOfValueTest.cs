@@ -64,42 +64,42 @@ namespace Yahtzee.Tests
         [MemberData(nameof(SumOfOnes))]
         public void ReturnsTheSumOfOnes(int[] dice, int expected)
         {
-            Assert.Equal(expected, Score.Ones(dice));
+            Assert.Equal(expected, Scorer.Ones(dice));
         }
 
         [Theory]
         [MemberData(nameof(SumOfTwos))]
         public void ReturnsTheSumOfTwos(int[] dice, int expected)
         {
-            Assert.Equal(expected, Score.Twos(dice));
+            Assert.Equal(expected, Scorer.Twos(dice));
         }
 
         [Theory]
         [MemberData(nameof(SumOfThrees))]
         public void ReturnsTheSumOfThrees(int[] dice, int expected)
         {
-            Assert.Equal(expected, Score.Threes(dice));
+            Assert.Equal(expected, Scorer.Threes(dice));
         }
 
         [Theory]
         [MemberData(nameof(SumOfFours))]
         public void ReturnsTheSumOfFours(int[] dice, int expected)
         {
-            Assert.Equal(expected, Score.Fours(dice));
+            Assert.Equal(expected, Scorer.Fours(dice));
         }
 
         [Theory]
         [MemberData(nameof(SumOfFives))]
         public void ReturnsTheSumOfFives(int[] dice, int expected)
         {
-            Assert.Equal(expected, Score.Fives(dice));
+            Assert.Equal(expected, Scorer.Fives(dice));
         }
 
         [Theory]
         [MemberData(nameof(SumOfSixes))]
         public void ReturnsTheSumOfSixes(int[] dice, int expected)
         {
-            Assert.Equal(expected, Score.Sixes(dice));
+            Assert.Equal(expected, Scorer.Sixes(dice));
         }
     }
 }

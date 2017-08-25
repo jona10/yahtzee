@@ -9,13 +9,13 @@ namespace Yahtzee.Test
         [Fact]
         public void ReturnsZeroWhenDiceDontFormAYahtzee()
         {
-            Assert.Equal(0, Score.Yahtzee(new List<int> { 1, 2, 3, 4, 5 }));
+            Assert.Equal(0, Scorer.Yahtzee(new List<int> { 1, 2, 3, 4, 5 }));
         }
 
         [Fact]
         public void ReturnsFiftyWhenDiceFormAYahtzee()
         {
-            Assert.Equal(50, Score.Yahtzee(new List<int> { 1, 1, 1, 1, 1 }));
+            Assert.Equal(50, Scorer.Yahtzee(new List<int> { 1, 1, 1, 1, 1 }));
         }
     }
 }

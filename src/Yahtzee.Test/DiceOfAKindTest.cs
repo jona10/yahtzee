@@ -30,14 +30,14 @@ namespace Yahtzee.Test
         [MemberData(nameof(ThreeOfAKind))]
         public void ReturnsTheSumOfAllDiceWhenThreeDiceAreOfTheSameKind(int[] dice, int expected)
         {
-            Assert.Equal(expected, Score.ThreeOfAKind(dice));
+            Assert.Equal(expected, Scorer.ThreeOfAKind(dice));
         }
 
         [Theory]
         [MemberData(nameof(FourOfAKind))]
         public void ReturnsTheSumOfAllDiceWhenFourDiceAreOfTheSameKind(int[] dice, int expected)
         {
-            Assert.Equal(expected, Score.FourOfAKind(dice));
+            Assert.Equal(expected, Scorer.FourOfAKind(dice));
         }
     }
 }

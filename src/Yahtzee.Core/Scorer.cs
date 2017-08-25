@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Yahtzee.Core
 {
-    public static class Score
+    public static class Scorer
     {
         private static int DiceOfValue(int value, IReadOnlyCollection<int> dice)
         {
