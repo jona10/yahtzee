@@ -10,7 +10,13 @@
             Fours,
             Fives,
             Sixes,
-            ThreeOfAKind
+            ThreeOfAKind,
+            FourOfAKind,
+            FullHouse,
+            SmallStraight,
+            LongStraight,
+            Chance,
+            Yahtzee
         }
     }
 }
