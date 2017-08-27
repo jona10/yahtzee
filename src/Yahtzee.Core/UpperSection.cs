@@ -1,138 +1,50 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Yahtzee.Core
 {
     public class UpperSection
     {
-        private readonly Score _ones;
-        private readonly Score _twos;
-        private readonly Score _threes;
-        private readonly Score _fours;
-        private readonly Score _fives;
-        private readonly Score _sixes;
+        private const int UpperBonusLimit = 63;
+        private const int UpperBonusValue = 35;
+
+        private readonly Dictionary<ScoreCard.Items, Score> _items;
 
         public UpperSection(Func<IEnumerable<int>, int> onesScorer, Func<IEnumerable<int>, int> twosScorer, Func<IEnumerable<int>, int> threesScorer, Func<IEnumerable<int>, int> foursScorer, Func<IEnumerable<int>, int> fivesScorer, Func<IEnumerable<int>, int> sixesScorer)
         {
-            _ones = new Score(onesScorer);
-            _twos = new Score(twosScorer);
-            _threes = new Score(threesScorer);
-            _fours = new Score(foursScorer);
-            _fives = new Score(fivesScorer);
-            _sixes = new Score(sixesScorer);
+            _items = new Dictionary<ScoreCard.Items, Score>();
+            _items.Add(ScoreCard.Items.Ones, new Score(onesScorer));
+            _items.Add(ScoreCard.Items.Twos, new Score(twosScorer));
+            _items.Add(ScoreCard.Items.Threes, new Score(threesScorer));
+            _items.Add(ScoreCard.Items.Fours, new Score(foursScorer));
+            _items.Add(ScoreCard.Items.Fives, new Score(fivesScorer));
+            _items.Add(ScoreCard.Items.Sixes, new Score(sixesScorer));
         }
 
-        public int Ones { get { return _ones.Value; } }
-        public int Twos { get { return _twos.Value; } }
-        public int Threes { get { return _threes.Value; } }
-        public int Fours { get { return _fours.Value; } }
-        public int Fives { get { return _fives.Value; } }
-        public int Sixes { get { return _sixes.Value; } }
+        private int SumOfLockedScore => _items.Values.Where(x => x.IsLocked()).Select(x => x.Value).Sum();
 
-        private int SumOfLockedScore
-        {
-            get
-            {
-                var score = 0;
-                if (_ones.IsLocked())
-                    score += _ones.Value;
-
-                if (_twos.IsLocked())
-                    score += _twos.Value;
-
-                if (_threes.IsLocked())
-                    score += _threes.Value;
-
-                if (_fours.IsLocked())
-                    score += _fours.Value;
-
-                if (_fives.IsLocked())
-                    score += _fives.Value;
-
-                if (_sixes.IsLocked())
-                    score += _sixes.Value;
-
-                return score;
-            }
-        }
-
-        public int Score
-        {
-            get
-            {
-                return SumOfLockedScore + Bonus;
-            }
-        }
-
-        public int Bonus
-        {
-            get
-            {
-                if (SumOfLockedScore >= 63)
-                {
-                    return 35;
-                }
-
-                return 0;
-            }
-        }
+        public int Ones => _items[ScoreCard.Items.Ones].Value;
+        public int Twos => _items[ScoreCard.Items.Twos].Value;
+        public int Threes => _items[ScoreCard.Items.Threes].Value;
+        public int Fours => _items[ScoreCard.Items.Fours].Value;
+        public int Fives => _items[ScoreCard.Items.Fives].Value;
+        public int Sixes => _items[ScoreCard.Items.Sixes].Value;
+        public int Score => SumOfLockedScore + Bonus;
+        public int Bonus => SumOfLockedScore >= UpperBonusLimit ? UpperBonusValue : 0;
 
         public void Lock(ScoreCard.Items item)
         {
             switch (item)
             {
                 case ScoreCard.Items.Ones:
-                    _ones.LockIn();
-                    _twos.Reset();
-                    _threes.Reset();
-                    _fours.Reset();
-                    _fives.Reset();
-                    _sixes.Reset();
-                    break;
-
                 case ScoreCard.Items.Twos:
-                    _ones.Reset();
-                    _twos.LockIn();
-                    _threes.Reset();
-                    _fours.Reset();
-                    _fives.Reset();
-                    _sixes.Reset();
-                    break;
-
                 case ScoreCard.Items.Threes:
-                    _ones.Reset();
-                    _twos.Reset();
-                    _threes.LockIn();
-                    _fours.Reset();
-                    _fives.Reset();
-                    _sixes.Reset();
-                    break;
-
                 case ScoreCard.Items.Fours:
-                    _ones.Reset();
-                    _twos.Reset();
-                    _threes.Reset();
-                    _fours.LockIn();
-                    _fives.Reset();
-                    _sixes.Reset();
-                    break;
-
                 case ScoreCard.Items.Fives:
-                    _ones.Reset();
-                    _twos.Reset();
-                    _threes.Reset();
-                    _fours.Reset();
-                    _fives.LockIn();
-                    _sixes.Reset();
-                    break;
-
                 case ScoreCard.Items.Sixes:
-                    _ones.Reset();
-                    _twos.Reset();
-                    _threes.Reset();
-                    _fours.Reset();
-                    _fives.Reset();
-                    _sixes.LockIn();
+                    _items[item].LockIn();
+                    _items.Values.ToList().ForEach(x => x.Reset());
                     break;
 
                 default:
@@ -142,12 +54,8 @@ namespace Yahtzee.Core
 
         public void Preview(IEnumerable<int> dice)
         {
-            _ones.Preview(dice);
-            _twos.Preview(dice);
-            _threes.Preview(dice);
-            _fours.Preview(dice);
-            _fives.Preview(dice);
-            _sixes.Preview(dice);
+            foreach (var current in _items.Values)
+                current.Preview(dice);
         }
     }
 }
