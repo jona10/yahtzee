@@ -10,6 +10,11 @@ namespace Yahtzee.Core
             return dice.Where(die => die == value).Sum();
         }
 
+        public static int Chance(IEnumerable<int> dice)
+        {
+            return dice.Sum();
+        }
+
         public static int Ones(IEnumerable<int> dice) => DiceOfValue(1, dice);
 
         public static int Twos(IEnumerable<int> dice) => DiceOfValue(2, dice);
